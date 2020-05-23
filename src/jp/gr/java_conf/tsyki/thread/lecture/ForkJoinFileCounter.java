@@ -21,7 +21,8 @@ public class ForkJoinFileCounter {
 		}
 		String path = args[0];
 		//Executorで同じことをする場合の例(スレッドが大量に作られ効率が悪い)
-		ForkJoinTask<Long> task = pool.submit(new FileCountTask(path));
+		ForkJoinTask<Long> task = new FileCountTask(path);
+		pool.submit(task);
 		long sumFileCount = task.join();
 		System.out.println(sumFileCount);
 	}
